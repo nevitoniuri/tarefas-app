@@ -1,22 +1,25 @@
+<div class="pagina" [style]="{width: '30%'}">
+    <div class="input">
+        <input pInputText #descricao type="text" placeholder="Adicione a sua Tarefa...">
+        <button pButton (click)="criarTarefa(descricao.value); descricao.value=''" type="button"
+            class="p-button-raised p-button-rounded" icon="pi pi-plus"></button>
+    </div>
 
-<div class="p-input-icon-left">
-    <input pInputText type="text"  placeholder="Adicione a sua Tarefa...">
-    <button pButton type="button" class="p-button-raised p-button-rounded" icon="pi pi-plus"></button>
+    <p-table [value]="tarefas" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Descrição</th>
+                <th>Concluída?</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-tarefa>
+            <tr>
+                <td>{{tarefa.descricao}}</td>
+                <td>
+                    <p-toggleButton (onChange)="toggleConcluida2($event)" [(ngModel)]="tarefa.concluida"
+                        onIcon="pi pi-check-circle" offIcon="pi pi-circle"></p-toggleButton>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
 </div>
-
-<p-table [value]="tarefas" responsiveLayout="scroll">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>ID</th>
-            <th>Descrição</th>
-            <th>Concluída?</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-tarefa>
-        <tr>
-            <td>{{tarefa.id}}</td>
-            <td>{{tarefa.descricao}}</td>
-            <td><p-toggleButton [(ngModel)]="tarefa.concluida" onIcon="pi pi-check-circle" offIcon="pi pi-circle"></p-toggleButton></td>
-        </tr>
-    </ng-template>
-</p-table>

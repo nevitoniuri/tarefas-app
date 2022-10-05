@@ -10,6 +10,7 @@ import { TableModule } from 'primeng/table';
 import { TarefaComponent } from './tarefa/tarefa.component';
 import { HttpClientModule } from '@angular/common/http';
 import {ToggleButtonModule} from 'primeng/togglebutton';
+import {PanelModule} from 'primeng/panel';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {ToggleButtonModule} from 'primeng/togglebutton';
     InputTextModule,
     TableModule,
     HttpClientModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    PanelModule
   ],
   providers: [],
   bootstrap: [AppComponent]
