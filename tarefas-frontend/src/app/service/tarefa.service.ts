@@ -28,12 +28,12 @@ export class TarefaService {
     return this.http.delete<Tarefa>(this.url + id);
   }
 
-  concluirTarefa(id: number): Observable<Tarefa> {
-    return this.http.put<Tarefa>(this.url + id + "/concluir", null);
+  concluirTarefa(tarefa: Tarefa): Observable<Tarefa> {
+    return this.http.put<Tarefa>(this.url + tarefa.id + "/concluir", tarefa);
   }
 
-  retomarTarefa(id: number): Observable<Tarefa> {
-    return this.http.put<Tarefa>(this.url + id + "/retomar", null);
+  retomarTarefa(tarefa: Tarefa): Observable<Tarefa> {
+    return this.http.put<Tarefa>(this.url + tarefa.id + "/retomar", tarefa);
   }
 
 }

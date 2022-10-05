@@ -5,6 +5,7 @@ import com.nevitoniuri.tarefasapi.exception.RecursoNaoEncontradoException;
 import com.nevitoniuri.tarefasapi.model.Tarefa;
 import com.nevitoniuri.tarefasapi.repository.TarefaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +18,7 @@ public class TarefaService {
     private final TarefaRepository tarefaRepository;
 
     public List<Tarefa> listar() {
-        return tarefaRepository.findAll();
+        return tarefaRepository.findAll(Sort.by(Sort.Direction.ASC, "descricao"));
     }
 
     @Transactional

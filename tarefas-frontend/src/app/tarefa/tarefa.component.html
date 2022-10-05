@@ -1,23 +1,28 @@
 <div class="pagina" [style]="{width: '30%'}">
     <div class="input">
         <input pInputText #descricao type="text" placeholder="Adicione a sua Tarefa...">
-        <button pButton (click)="criarTarefa(descricao.value); descricao.value=''" [disabled]="descricao.value === ''" type="button"
-            class="p-button-raised p-button-rounded" icon="pi pi-plus"></button>
+        <button pButton (click)="criarTarefa(descricao.value); descricao.value=''" [disabled]="descricao.value === ''"
+            type="button" class="p-button-raised p-button-rounded" icon="pi pi-plus"></button>
     </div>
 
     <p-table [value]="tarefas" responsiveLayout="scroll">
         <ng-template pTemplate="header">
             <tr>
-                <th>Descrição</th>
-                <th>Concluída?</th>
+                <th>Tarefa</th>
+                <th>Status</th>
+                <th>Ações</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-tarefa>
             <tr>
                 <td>{{tarefa.descricao}}</td>
                 <td>
-                    <p-toggleButton (onChange)="toggleConcluida2($event)" [(ngModel)]="tarefa.concluida"
-                        onIcon="pi pi-check-circle" offIcon="pi pi-circle"></p-toggleButton>
+                    <p-toggleButton (onChange)="toggleConcluida(tarefa)" [(ngModel)]="tarefa.concluida"
+                        onIcon="pi pi-check-circle" offIcon="pi pi-circle-off"></p-toggleButton>
+                </td>
+                <td>
+                    <button (click)="handleEditar(tarefa)" pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-secondary p-button-text"></button>
+                    <button (click)="handleDeletar(tarefa)" pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"></button>
                 </td>
             </tr>
         </ng-template>

@@ -37,21 +37,34 @@ export class TarefaComponent implements OnInit {
     this.tarefaService.criarTarefa({ descricao } as Tarefa).subscribe(tarefa => {
       this.tarefas.push(tarefa);
     });
+    location.reload();
+  }
+
+  handleEditar(tarefa: Tarefa): void {
+    this.tarefaService.atualizarTarefa(tarefa).subscribe(tarefa => {
+      console.log(tarefa);
+    });
+  }
+
+  handleDeletar(tarefa: Tarefa): void {
+    this.tarefas = this.tarefas.filter(h => h !== tarefa);
+    this.tarefaService.deletarTarefa(tarefa.id).subscribe();
+    location.reload();
   }
 
   toggleConcluida(tarefa: Tarefa): void {
     tarefa.concluida = !tarefa.concluida;
-  }
-
-  toggleConcluida2(tarefa: Tarefa): void {
     if (tarefa.concluida) {
-      this.tarefaService.retomarTarefa(tarefa.id).subscribe(tarefa => {
+      this.tarefaService.retomarTarefa(tarefa).subscribe(tarefa => {
         tarefa.concluida = false;
       });
+      location.reload();
     } else {
-      this.tarefaService.concluirTarefa(tarefa.id).subscribe(tarefa => {
+      this.tarefaService.concluirTarefa(tarefa).subscribe(tarefa => {
         tarefa.concluida = true;
       });
+      location.reload();
     }
   }
+
 }
