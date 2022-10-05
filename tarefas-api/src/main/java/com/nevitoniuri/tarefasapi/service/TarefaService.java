@@ -5,10 +5,10 @@ import com.nevitoniuri.tarefasapi.exception.RecursoNaoEncontradoException;
 import com.nevitoniuri.tarefasapi.model.Tarefa;
 import com.nevitoniuri.tarefasapi.repository.TarefaRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -16,8 +16,8 @@ public class TarefaService {
 
     private final TarefaRepository tarefaRepository;
 
-    public Page<Tarefa> listar(Pageable pageable) {
-        return tarefaRepository.findAll(pageable);
+    public List<Tarefa> listar() {
+        return tarefaRepository.findAll();
     }
 
     @Transactional

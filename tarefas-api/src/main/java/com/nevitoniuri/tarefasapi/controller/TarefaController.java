@@ -7,17 +7,16 @@ import com.nevitoniuri.tarefasapi.model.dto.TarefaDTO;
 import com.nevitoniuri.tarefasapi.service.TarefaService;
 import com.nevitoniuri.tarefasapi.util.RecursoCriado;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/tarefas")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class TarefaController {
 
     private final TarefaService tarefaService;
@@ -25,8 +24,8 @@ public class TarefaController {
     private final TarefaDisassembler tarefaDisassembler;
 
     @GetMapping
-    public Page<TarefaDTO> listar(@PageableDefault(sort = "descricao") Pageable pageable) {
-        return tarefaDisassembler.toDTOPage(pageable, tarefaService.listar(pageable));
+    public List<TarefaDTO> listar() {
+        return tarefaDisassembler.toDTOList(tarefaService.listar());
     }
 
     @PostMapping
