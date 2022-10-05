@@ -42,15 +42,16 @@ export class TarefaComponent implements OnInit {
   toggleConcluida(tarefa: Tarefa): void {
     tarefa.concluida = !tarefa.concluida;
   }
-  
+
   toggleConcluida2(tarefa: Tarefa): void {
     if (tarefa.concluida) {
       this.tarefaService.retomarTarefa(tarefa.id).subscribe(tarefa => {
         tarefa.concluida = false;
       });
     } else {
-      this.tarefaService.concluirTarefa(tarefa.id);
+      this.tarefaService.concluirTarefa(tarefa.id).subscribe(tarefa => {
+        tarefa.concluida = true;
+      });
     }
   }
-
 }

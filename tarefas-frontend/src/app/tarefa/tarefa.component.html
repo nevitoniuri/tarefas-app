@@ -1,7 +1,7 @@
 <div class="pagina" [style]="{width: '30%'}">
     <div class="input">
         <input pInputText #descricao type="text" placeholder="Adicione a sua Tarefa...">
-        <button pButton (click)="criarTarefa(descricao.value); descricao.value=''" type="button"
+        <button pButton (click)="criarTarefa(descricao.value); descricao.value=''" [disabled]="descricao.value === ''" type="button"
             class="p-button-raised p-button-rounded" icon="pi pi-plus"></button>
     </div>
 
