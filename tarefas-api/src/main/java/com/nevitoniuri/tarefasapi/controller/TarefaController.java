@@ -43,17 +43,17 @@ public class TarefaController {
 
     @PutMapping("{id}/concluir")
     public void concluir(@PathVariable Long id) {
-        tarefaService.concluir(id);
+        tarefaService.concluir(tarefaService.buscarPorId(id));
     }
 
     @PutMapping("{id}/retomar")
     public void retomar(@PathVariable Long id) {
-        tarefaService.retomar(id);
+        tarefaService.retomar(tarefaService.buscarPorId(id));
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
-        tarefaService.excluir(id);
+        tarefaService.excluir(tarefaService.buscarPorId(id));
         return ResponseEntity.noContent().build();
     }
 
