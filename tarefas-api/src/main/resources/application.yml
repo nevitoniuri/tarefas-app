@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: tarefas-api
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tarefa-app
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
