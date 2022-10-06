@@ -18,7 +18,7 @@
                 <td>{{tarefa.descricao}}</td>
                 <td>
                     <p-toggleButton (onChange)="toggleConcluida(tarefa)" [(ngModel)]="tarefa.concluida"
-                        onIcon="pi pi-check-circle" offIcon="pi pi-circle-off"></p-toggleButton>
+                        onIcon="pi pi-check" offIcon="pi pi-circle-off"></p-toggleButton>
                 </td>
                 <td>
                     <button (click)="mostrarModalEditar(tarefa)" pButton pRipple type="button" icon="pi pi-pencil"

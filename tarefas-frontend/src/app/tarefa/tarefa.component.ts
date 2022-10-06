@@ -10,7 +10,6 @@ import { TarefaService } from '../service/tarefa.service';
 export class TarefaComponent implements OnInit {
 
   tarefaEditada: Tarefa = new Tarefa(0, '', false);
-
   tarefas: Tarefa[] = [];
   mostrarEditarDialog: boolean = false;
 
@@ -52,19 +51,11 @@ export class TarefaComponent implements OnInit {
   }
 
   handleEditar(descricao: string): void {
-    this.tarefaEditada.descricao = descricao;
     const id = this.tarefaEditada.id;
     this.tarefaService.editar2(id, descricao).subscribe(tarefa => {
       console.log(tarefa);
     });
     location.reload();
-  }
-
-  editarTarefa(tarefa: Tarefa): void {
-    this.tarefas = this.tarefas.filter(h => h !== tarefa);
-    this.tarefaService.editar(tarefa).subscribe(tarefa => {
-      this.tarefas.push(tarefa);
-    });
   }
 
   handleDeletar(tarefa: Tarefa): void {
