@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Tarefa } from '../model/Tarefa';
 
@@ -10,30 +10,40 @@ export class TarefaService {
 
   url: string = "http://localhost:8080/tarefas/";
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
   constructor(private http: HttpClient) { }
 
-  listarTarefas(): Observable<Tarefa[]> {
+  listar(): Observable<Tarefa[]> {
     return this.http.get<Tarefa[]>(this.url);
   }
 
-  criarTarefa(tarefa: Tarefa): Observable<Tarefa> {
+  criar(tarefa: Tarefa): Observable<Tarefa> {
     return this.http.post<Tarefa>(this.url, tarefa);
   }
 
-  atualizarTarefa(tarefa: Tarefa): Observable<Tarefa> {
-    return this.http.put<Tarefa>(this.url, tarefa);
+  editar(tarefa: Tarefa): Observable<Tarefa> {
+    const body = { descricao: tarefa.descricao };
+    return this.http.put<Tarefa>(this.url + tarefa.id, body, this.httpOptions);
   }
 
-  deletarTarefa(id: number): Observable<Tarefa> {
-    return this.http.delete<Tarefa>(this.url + id);
+  editar2(id: number, descricao: string): Observable<Tarefa> {
+    const body = { descricao: descricao };
+    return this.http.put<Tarefa>(this.url + id, body, this.httpOptions);
   }
 
-  concluirTarefa(tarefa: Tarefa): Observable<Tarefa> {
+  concluir(tarefa: Tarefa): Observable<Tarefa> {
     return this.http.put<Tarefa>(this.url + tarefa.id + "/concluir", tarefa);
   }
 
-  retomarTarefa(tarefa: Tarefa): Observable<Tarefa> {
+  retomar(tarefa: Tarefa): Observable<Tarefa> {
     return this.http.put<Tarefa>(this.url + tarefa.id + "/retomar", tarefa);
+  }
+
+  deletar(id: number): Observable<Tarefa> {
+    return this.http.delete<Tarefa>(this.url + id);
   }
 
 }

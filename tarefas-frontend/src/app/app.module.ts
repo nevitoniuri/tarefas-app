@@ -9,9 +9,11 @@ import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { TarefaComponent } from './tarefa/tarefa.component';
 import { HttpClientModule } from '@angular/common/http';
-import {ToggleButtonModule} from 'primeng/togglebutton';
-import {PanelModule} from 'primeng/panel';
-
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { PanelModule } from 'primeng/panel';
+import { DialogModule } from 'primeng/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,10 @@ import {PanelModule} from 'primeng/panel';
     TableModule,
     HttpClientModule,
     ToggleButtonModule,
-    PanelModule
+    PanelModule,
+    DialogModule,
+    BrowserAnimationsModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

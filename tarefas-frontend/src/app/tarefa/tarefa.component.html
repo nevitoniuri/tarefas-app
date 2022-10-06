@@ -21,10 +21,23 @@
                         onIcon="pi pi-check-circle" offIcon="pi pi-circle-off"></p-toggleButton>
                 </td>
                 <td>
-                    <button (click)="handleEditar(tarefa)" pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-secondary p-button-text"></button>
-                    <button (click)="handleDeletar(tarefa)" pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"></button>
+                    <button (click)="mostrarModalEditar(tarefa)" pButton pRipple type="button" icon="pi pi-pencil"
+                        class="p-button-rounded p-button-secondary p-button-text"></button>
+                    <button (click)="handleDeletar(tarefa)" pButton pRipple type="button" icon="pi pi-trash"
+                        class="p-button-rounded p-button-danger p-button-text"></button>
                 </td>
             </tr>
         </ng-template>
     </p-table>
+</div>
+
+<div class="card">
+
+    <p-dialog header="Editar Tarefa" [draggable]="false" [resizable]="false" [(visible)]="mostrarEditarDialog"
+        [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '20vw'}">
+        <input id="input" pInputText #editar type="text" placeholder="Edite a sua Tarefa..." [value]="tarefaEditada.descricao">
+        <button pButton (click)="handleEditar(editar.value); editar.value=''" type="submit" class="p-button-raised p-button-rounded"
+            icon="pi pi-check"></button>
+    </p-dialog>
+
 </div>

@@ -9,7 +9,10 @@ import { TarefaService } from '../service/tarefa.service';
 })
 export class TarefaComponent implements OnInit {
 
+  tarefaEditada: Tarefa = new Tarefa(0, '', false);
+
   tarefas: Tarefa[] = [];
+  mostrarEditarDialog: boolean = false;
 
   constructor(private tarefaService: TarefaService) { }
 
@@ -18,7 +21,7 @@ export class TarefaComponent implements OnInit {
   }
 
   listarTarefas() {
-    this.tarefaService.listarTarefas().subscribe(
+    this.tarefaService.listar().subscribe(
       (tarefas: Tarefa[]) => {
         for (let i = 0; i < tarefas.length; i++) {
           let tarefa = tarefas[i] as Tarefa;
@@ -34,33 +37,51 @@ export class TarefaComponent implements OnInit {
   criarTarefa(descricao: string): void {
     descricao = descricao.trim();
     if (!descricao) { return; }
-    this.tarefaService.criarTarefa({ descricao } as Tarefa).subscribe(tarefa => {
+    this.tarefaService.criar({ descricao } as Tarefa).subscribe(tarefa => {
       this.tarefas.push(tarefa);
     });
     location.reload();
   }
 
-  handleEditar(tarefa: Tarefa): void {
-    this.tarefaService.atualizarTarefa(tarefa).subscribe(tarefa => {
+  mostrarModalEditar(tarefa: Tarefa): void {
+    this.mostrarEditarDialog = true;
+
+    this.tarefaEditada.id = tarefa.id;
+    this.tarefaEditada.descricao = tarefa.descricao;
+    this.tarefaEditada.concluida = tarefa.concluida;
+  }
+
+  handleEditar(descricao: string): void {
+    this.tarefaEditada.descricao = descricao;
+    const id = this.tarefaEditada.id;
+    this.tarefaService.editar2(id, descricao).subscribe(tarefa => {
       console.log(tarefa);
+    });
+    location.reload();
+  }
+
+  editarTarefa(tarefa: Tarefa): void {
+    this.tarefas = this.tarefas.filter(h => h !== tarefa);
+    this.tarefaService.editar(tarefa).subscribe(tarefa => {
+      this.tarefas.push(tarefa);
     });
   }
 
   handleDeletar(tarefa: Tarefa): void {
     this.tarefas = this.tarefas.filter(h => h !== tarefa);
-    this.tarefaService.deletarTarefa(tarefa.id).subscribe();
+    this.tarefaService.deletar(tarefa.id).subscribe();
     location.reload();
   }
 
   toggleConcluida(tarefa: Tarefa): void {
     tarefa.concluida = !tarefa.concluida;
     if (tarefa.concluida) {
-      this.tarefaService.retomarTarefa(tarefa).subscribe(tarefa => {
+      this.tarefaService.retomar(tarefa).subscribe(tarefa => {
         tarefa.concluida = false;
       });
       location.reload();
     } else {
-      this.tarefaService.concluirTarefa(tarefa).subscribe(tarefa => {
+      this.tarefaService.concluir(tarefa).subscribe(tarefa => {
         tarefa.concluida = true;
       });
       location.reload();
